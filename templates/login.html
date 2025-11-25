@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Maranatha University</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: cursive, Arial, sans-serif;
+      background: linear-gradient(135deg, red, blue);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      background: red;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .logo {
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 100px;
+      height: auto;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: blue;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input {
+      padding: 12px;
+      border: 2px solid blue;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: red;
+    }
+
+    button {
+      background: linear-gradient(90deg, red, blue);
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .footer {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="{{url_for('static',filename='images/maranatha-name-and-logo (1).png')}}" alt="Logo" sizes="70px">
+    </div>
+
+    <h2>Student Login</h2>
+
+    <!-- Login Form -->
+    <form method="POST" action="{{url_for('login')}}" id="form">
+      <input type="text" id="name" name="name" placeholder="Enter your name">
+      <input type="password" id="password" name="password" placeholder="Enter your password">
+      <button type="submit" id="button">Login</button>
+    </form>
+
+    <div class="footer">
+      <p id="error" style="color: white;"></p>
+      {%if error%}
+      <p style="color: red;font-weight: bold;">{{error}}</p>
+      {%endif%}
+       © Maranatha University
+    </div>
+  </div>
+</body>
+<script>
+document.getElementById("form").addEventListener("click", function () {
+
+    // Login fields
+    let name = document.getElementById("name").value;
+    let password = document.getElementById("password").value;
+    let error = document.getElementById("error");
+
+    // Hostel selection fields
+    let gender = document.getElementById("gender").value;
+    let room = document.getElementById("roomtype").value;
+
+    // Clear old errors
+    error.textContent = "";
+
+    // Validate name
+    if (name === "" || name.length < 5) {
+        error.textContent = "Please enter your correct name.";
+        return;
+    }
+
+    // Validate password
+    if (password === "" || password.length < 5) {
+        error.textContent = "Please enter a valid password.";
+        return;
+    }
+
+    // Validate hostel gender
+    if (gender === "") {
+        error.textContent = "Please select hostel gender.";
+        return;
+    }
+
+    // Validate bedspace type
+    if (room === "") {
+        error.textContent = "Please select bedspace type.";
+        return;
+    }
+
+    // Build page to redirect to
+    let page = gender + "-" + room + ".html";
+
+    // Redirect
+    window.location.href = page;
+});
+</script>
+</html>
