@@ -5,11 +5,11 @@ import os
 app=Flask(__name__)
 
 db = mysql.connector.connect(
-    host=os.getenv("mysql.railway.internal"),
-    user=os.getenv("root"),
-    password=os.getenv("ZgKFXJtURyQjHBnEUpyIjgMwgiDuttpz"),
-    database=os.getenv("railway"),
-    port=int(os.getenv("3306"))
+    host=os.getenv("MYSQLHOST"),         # The host Railway gives you
+    user=os.getenv("MYSQLUSER"),         # Your database username
+    password=os.getenv("MYSQLPASSWORD"), # Your database password
+    database=os.getenv("MYSQLDATABASE"), # Your database name
+    port=int(os.getenv("MYSQLPORT"))     # Convert the port string to an integer
 )
 app.secret_key="your_key"
 
@@ -96,4 +96,5 @@ if __name__=="__main__":
 
 
     app.run(debug=False)
+
 
