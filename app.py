@@ -1,12 +1,15 @@
 from flask import Flask,render_template,request,session,redirect,url_for
 import mysql.connector
+import os
 
 app=Flask(__name__)
-db=mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",
-    database="allocation"
+
+db = mysql.connector.connect(
+    host=os.getenv("mysql.railway.internal"),
+    user=os.getenv("root"),
+    password=os.getenv("ZgKFXJtURyQjHBnEUpyIjgMwgiDuttpz"),
+    database=os.getenv("railway"),
+    port=int(os.getenv("3306"))
 )
 app.secret_key="your_key"
 
@@ -93,3 +96,4 @@ if __name__=="__main__":
 
 
     app.run(debug=False)
+
