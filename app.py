@@ -9,7 +9,7 @@ db = mysql.connector.connect(
     user=os.getenv("MYSQLUSER"),         # Your database username
     password=os.getenv("MYSQLPASSWORD"), # Your database password
     database=os.getenv("MYSQLDATABASE"), # Your database name
-    port=int(os.getenv("MYSQLPORT"))     # Convert the port string to an integer
+    port=int(os.getenv("MYSQLPORT", 3306))     # Convert the port string to an integer
 )
 app.secret_key="your_key"
 
@@ -96,5 +96,6 @@ if __name__=="__main__":
 
 
     app.run(debug=False)
+
 
 
