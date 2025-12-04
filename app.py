@@ -9,7 +9,7 @@ MYSQL_HOST = os.getenv("MYSQLHOST")
 MYSQL_USER = os.getenv("MYSQLUSER")
 MYSQL_PASSWORD = os.getenv("MYSQLPASSWORD")
 MYSQL_DATABASE = os.getenv("MYSQLDATABASE")
-MYSQL_PORT = os.getenv("MYSQLPORT", "3306")  # default to 3306 if missing
+MYSQL_PORT = int(os.getenv("MYSQLPORT", 3306))  # default to 3306 if missing
 
 # Convert port to integer safely
 try:
@@ -117,3 +117,4 @@ def bedspaces():
 
 if __name__ == "__main__":
     app.run(debug=False)
+
