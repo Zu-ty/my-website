@@ -40,8 +40,8 @@ def home():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        name = request.form["name"]
-        password = request.form["password"]
+        name = request.form["name"].strip()
+        password = request.form["password"].strip()
 
         if conn:
             conn.execute(
@@ -118,6 +118,7 @@ def bedspaces():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # Render provides this PORT env var
     app.run(host="0.0.0.0", port=port, debug=False)
+
 
 
 
